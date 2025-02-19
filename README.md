@@ -40,3 +40,164 @@ tool that allowed users to use programming languages in creating complex tests.
 • WebDriver, the newer breakthrough that allows your test scripts to communicate directly to the browser.
 • Selenium Grid is also a tool that is used to execute parallel tests across different browsers and operating systems remotely.
 • Selenium RC and WebDriver was merged to form Selenium 2.
+
+## Webdriver
+Selenium WebDriver is an open-source automation tool for web applications. It allows testers to simulate user interactions like clicking, typing, and navigating pages across different browsers (Chrome, Firefox, Edge, etc.). WebDriver supports multiple programming languages (Java, Python, C#, etc.) and integrates with testing frameworks like TestNG and JUnit. It is widely used for functional and regression testing.
+
+It's a Java Interface(Blue print of class), It is an API
+
+![New Project](https://github.com/user-attachments/assets/1d0b0b10-5c57-48ba-aef7-a16ce5804c74)
+
+## Steps to Create a Maven Project for Selenium Testing in Eclipse
+1. Install Prerequisites
+- Ensure Java JDK and Eclipse IDE are installed.
+- Install Maven (or use Eclipse’s built-in Maven).
+- Install Selenium WebDriver JARs (later added via dependencies).
+
+2. Create a Maven Project
+- Open Eclipse → Go to File → New → Maven Project.
+- Select Create a simple project and click Next.
+- Enter Group Id (e.g., com.selenium.test).
+- Enter Artifact Id (e.g., SeleniumMavenProject).
+- Click Finish to create the project.
+
+3. Add Selenium Dependencies
+- Open pom.xml and add the following dependencies inside <dependencies>:
+```java
+<dependencies>
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-java</artifactId>
+        <version>latest_version</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.testng</groupId>
+        <artifactId>testng</artifactId>
+        <version>latest_version</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+```
+- Save the file and let Maven download dependencies.
+
+4. Create a Test Class
+- In src/test/java, create a new package (com.test).
+- Inside the package, create a Java class (TestGoogle.java).
+
+5. Write a Selenium Test Script
+- Example TestNG Selenium script:
+```java
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
+
+public class TestGoogle {
+    @Test
+    public void openGoogle() {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://www.google.com");
+        System.out.println("Google opened successfully!");
+        driver.quit();
+    }
+}
+```
+6. Run the Test
+- Right-click on the test class → Run As → TestNG Test.
+- - Verify that Chrome opens and loads Google.
+
+7. (Optional) Configure testng.xml for Multiple Tests
+- Create testng.xml in the project root:
+```java
+<suite name="TestSuite">
+    <test name="GoogleTest">
+        <classes>
+            <class name="com.test.TestGoogle"/>
+        </classes>
+    </test>
+</suite>
+```
+
+# Web Elements & Locators in Selenium  
+
+## 📌 What is a Web Element?  
+A **Web Element** is any HTML component on a webpage, such as:  
+- Buttons  
+- Text fields  
+- Links  
+- Checkboxes  
+- Dropdowns  
+
+To interact with these elements, Selenium needs a way to **find** them. That’s where **Locators** come in!  
+
+---
+
+## 🔍 Locators in Selenium  
+Locators help Selenium **identify** web elements on a page. Below are the commonly used locators:  
+
+### 1️⃣ **ID**  
+- Fastest and most reliable (if unique).  
+- Example:  
+```java
+  driver.findElement(By.id("username")).sendKeys("admin");
+```
+### 2️⃣ **Name**  
+Useful when elements have unique name attributes.
+
+```java
+driver.findElement(By.name("email")).sendKeys("test@example.com");
+ ```
+### 3️⃣ **Class Name**
+Selects elements based on their class attribute.
+
+```java
+driver.findElement(By.className("login-btn")).click();
+ ```
+### 4️⃣ Tag Name
+Finds elements by HTML tag (<input>, <a>, <button>).
+
+```java
+driver.findElement(By.tagName("button")).click();
+ ```
+### 5️⃣ Link Text
+Finds hyperlinks (<a>) using the exact link text.
+
+```java
+driver.findElement(By.linkText("Forgot Password?")).click();
+ ```
+### 6️⃣ Partial Link Text
+Similar to Link Text but works with partial text.
+
+```java
+driver.findElement(By.partialLinkText("Forgot")).click();
+ ```
+### 7️⃣ CSS Selector
+Powerful and flexible locator method.
+
+```java
+driver.findElement(By.cssSelector("input[name='q']")).sendKeys("Selenium");
+ ```
+### 8️⃣ XPath
+Most powerful locator, used when others fail.
+
+1. Example (Absolute XPath):
+```java
+driver.findElement(By.xpath("/html/body/div/input")).click();
+ ```
+2. Example (Relative XPath):
+```java
+driver.findElement(By.xpath("//input[@name='q']")).sendKeys("Selenium");
+ ```
+
+[Back to Top](README.md#)
+
+## Reference
+- Edureka
+- SDET-QA
+- College Notes
+
+## Author 
+- Vaibhav R. Kale - QA Tester<br>
+[Code360](https://www.naukri.com/code360/profile/CoderVK) &nbsp; &nbsp;
+[LinkedIn](https://www.linkedin.com/in/vaibhav-kale)
