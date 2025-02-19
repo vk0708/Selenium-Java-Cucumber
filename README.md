@@ -3,7 +3,8 @@
 ## Index  
 1. [Selenium](#what-is-selenium)  
 2. [Web Driver and Maven Project](#webdriver)  
-3. [Web Elements and Locators](#web-elements--locators-in-selenium) 
+3. [Web Elements and Locators](#web-elements--locators-in-selenium)
+4. [Test Cases for Amazon Product Search](#amazon-product-search-automation) 
 
 ## What is Software Testing?
 • Software testing is an activity to check whether the actual results match the 
@@ -205,6 +206,88 @@ Choosing the right locator is crucial for test stability and performance.
 - Avoid absolute XPath as it may break with UI changes.
 
 [⬆ Back to Top](#index)
+
+## Amazon Product Search Automation
+
+### ✅ Test Cases for Amazon Product Search  
+
+| **TC ID**  | **Test Case**                         | **Steps**                                       | **Expected Result**                               |
+|------------|--------------------------------------|------------------------------------------------|------------------------------------------------|
+| **TC_001** | Verify search bar functionality     | Enter "iPhone 15" in search bar & click search | Results should display **"iPhone 15"**         |
+| **TC_002** | Check auto-suggestions              | Type "Laptop" in search bar                    | Suggestions should appear                      |
+| **TC_003** | Search for invalid product          | Enter "xyz123randomproduct"                    | "No results found" message                     |
+| **TC_004** | Search using filters                | Select "Electronics" & search "Smartphone"     | Results should be from **"Electronics"** category |
+| **TC_005** | Verify search performance           | Search "Gaming Laptop"                         | Results should load within **3-5 sec**        |
+
+---
+
+### 🔍 Web Elements & Locators  
+
+Selenium uses **locators** to find web elements on a page.  
+
+| **Locator**          | **Example**                                             |
+|----------------------|---------------------------------------------------------|
+| **ID**              | `driver.findElement(By.id("searchBox"))`                 |
+| **Name**            | `driver.findElement(By.name("q"))`                       |
+| **Class Name**      | `driver.findElement(By.className("btn-search"))`         |
+| **Tag Name**        | `driver.findElement(By.tagName("button"))`               |
+| **Link Text**       | `driver.findElement(By.linkText("Click Here"))`          |
+| **Partial Link Text** | `driver.findElement(By.partialLinkText("Click"))`      |
+| **CSS Selector**    | `driver.findElement(By.cssSelector("input[name='q']"))`  |
+| **XPath**          | `driver.findElement(By.xpath("//input[@name='q']"))`      |
+
+```java
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+public class AmazonSearchTest {
+    WebDriver driver;
+
+    @BeforeClass
+    public void setup() {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://www.amazon.com/");
+    }
+
+    @Test
+    public void testProductSearch() {
+        WebElement searchBox = driver.findElement(By.id("twotabsearchtextbox"));
+        searchBox.sendKeys("iPhone 15");
+        driver.findElement(By.id("nav-search-submit-button")).click();
+        WebElement searchResult = driver.findElement(By.xpath("//span[contains(text(),'iPhone 15')]"));
+        Assert.assertTrue(searchResult.isDisplayed(), "Search result validation failed!");
+    }
+
+    @AfterClass
+    public void teardown() {
+        driver.quit();
+    }
+}
+```
+
+### 📝 Short Notes on Selenium Test
+✔ @BeforeClass - Initializes WebDriver, maximizes browser, and opens Amazon.
+
+✔ @Test -
+- Locates search box and enters "iPhone 15".
+- Clicks search button.
+- Verifies search results contain "iPhone 15".
+
+✔ @AfterClass - Closes the browser after test execution.
+
+### 🔹 Key Takeaways
+✅ Uses TestNG for structured test execution <br>
+✅ Uses By.id() and By.xpath() for locators <br>
+✅ Uses Assertions to validate search results <br>
+✅ Ensures browser handling with @BeforeClass & @AfterClass <br>
 
 ## Reference
 - Edureka
