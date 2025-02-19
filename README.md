@@ -1,5 +1,10 @@
 # Automation with Selenium Java with Cucumber and Frameworks
 
+## Index  
+1. [Selenium](#what-is-selenium)  
+2. [Web Driver and Maven Project](#webdriver)  
+3. [Web Elements and Locators](#web-elements--locators-in-selenium) 
+
 ## What is Software Testing?
 • Software testing is an activity to check whether the actual results match the 
 expected results and to ensure that the software system is Defect free. 
@@ -40,6 +45,8 @@ tool that allowed users to use programming languages in creating complex tests.
 • WebDriver, the newer breakthrough that allows your test scripts to communicate directly to the browser.
 • Selenium Grid is also a tool that is used to execute parallel tests across different browsers and operating systems remotely.
 • Selenium RC and WebDriver was merged to form Selenium 2.
+
+[⬆ Back to Top](#index)
 
 ## Webdriver
 Selenium WebDriver is an open-source automation tool for web applications. It allows testers to simulate user interactions like clicking, typing, and navigating pages across different browsers (Chrome, Firefox, Edge, etc.). WebDriver supports multiple programming languages (Java, Python, C#, etc.) and integrates with testing frameworks like TestNG and JUnit. It is widely used for functional and regression testing.
@@ -118,10 +125,11 @@ public class TestGoogle {
     </test>
 </suite>
 ```
+[⬆ Back to Top](#index)
 
-# Web Elements & Locators in Selenium  
+## Web Elements & Locators in Selenium  
 
-## 📌 What is a Web Element?  
+### 📌 What is a Web Element?  
 A **Web Element** is any HTML component on a webpage, such as:  
 - Buttons  
 - Text fields  
@@ -133,7 +141,7 @@ To interact with these elements, Selenium needs a way to **find** them. That’s
 
 ---
 
-## 🔍 Locators in Selenium  
+### 🔍 Locators in Selenium  
 Locators help Selenium **identify** web elements on a page. Below are the commonly used locators:  
 
 ### 1️⃣ **ID**  
@@ -190,7 +198,13 @@ driver.findElement(By.xpath("/html/body/div/input")).click();
 driver.findElement(By.xpath("//input[@name='q']")).sendKeys("Selenium");
  ```
 
-[Back to Top](README.md#)
+### Conclusion
+Choosing the right locator is crucial for test stability and performance.
+- Use ID and Name when available (fastest).
+- Use XPath and CSS Selectors when needed (more flexible but slower).
+- Avoid absolute XPath as it may break with UI changes.
+
+[⬆ Back to Top](#index)
 
 ## Reference
 - Edureka
